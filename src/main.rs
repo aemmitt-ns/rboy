@@ -5,7 +5,7 @@ use std::sync::mpsc::{self, Receiver, SyncSender, TryRecvError, TrySendError};
 use std::sync::{Arc, Mutex};
 use std::thread;
 use cpal::traits::{HostTrait, DeviceTrait, StreamTrait};
-use glium::glutin::platform::desktop::EventLoopExtDesktop;
+// use glium::glutin::platform::desktop::EventLoopExtDesktop;
 
 const EXITCODE_SUCCESS : i32 = 0;
 const EXITCODE_CPULOADFAILS : i32 = 2;
@@ -140,7 +140,7 @@ fn real_main() -> i32 {
 
     let cputhread = thread::spawn(move|| run_cpu(cpu, sender2, receiver1));
 
-    eventloop.run_return(move |ev, _evtarget, controlflow| {
+    eventloop.run(move |ev, _evtarget, controlflow| {
         use glium::glutin::event::{Event, WindowEvent, KeyboardInput};
         use glium::glutin::event::ElementState::{Pressed, Released};
         use glium::glutin::event::VirtualKeyCode;
